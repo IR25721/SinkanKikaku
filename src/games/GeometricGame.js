@@ -24,7 +24,7 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">コインを投げ続けて、表が出るまで何回かかるか？</p>
+    <p class="game-area-instruction">コインを投げ続け,初めて表が出るまでの試行回数を記録する</p>
     <div class="coin" id="coin">🪙</div>
     <div style="font-family:var(--font-mono); margin-bottom:8px;">
       <span id="flip-count" style="font-size:1.5rem; color:var(--color-geometric);">0</span>
@@ -40,12 +40,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: '幾何分布',
+      title: '幾何分布 (Geometric Distribution)',
       description:
-        '成功確率 p の試行を繰り返したとき、初めて成功するまでの試行回数の分布です。「次こそは！」と思っても、過去の失敗は将来に影響しません（メモリレス性）。',
+        '成功確率 p の Bernoulli 試行を繰り返したとき,初めて成功するまでの試行回数の分布である. 離散分布における唯一のメモリレス分布.',
       formula: 'P(X=k) = (1-p)^{k-1} \\cdot p \\quad (k = 1, 2, 3, \\ldots)',
       tags: ['離散分布', 'メモリレス性', '初成功までの回数'],
-      realWorld: 'ガチャで当たりが出るまでの回数、初めて的に当てるまでの射撃回数',
+      realWorld: 'ガチャで当たりが出るまでの回数,初めて的に当てるまでの射撃回数',
     })
   );
 

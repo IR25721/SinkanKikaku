@@ -68,3 +68,27 @@ export function clearResults(gameId) {
 export function clearAll() {
   localStorage.removeItem(STORE_KEY);
 }
+
+/**
+ * Export results for a specific game as a CSV file download.
+ * @param {string} gameId
+ */
+export function exportResultsAsCSV(gameId) {
+  const results = getResults(gameId);
+  if (results.length === 0) return;
+
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const filename = `${gameId}_${timestamp}.csv`;
+
+  const header = 'index,value';
+  const rows = results.map((v, i) => `${i + 1},${v}`);
+  const csv = [header, ...rows].join('\n');
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}

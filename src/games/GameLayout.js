@@ -3,7 +3,7 @@
  * Creates a consistent structure for all game pages.
  */
 import { navigate } from '../router.js';
-import { clearResults } from '../data/store.js';
+import { clearResults, exportResultsAsCSV } from '../data/store.js';
 
 /**
  * Create the game page layout.
@@ -56,12 +56,17 @@ export function createGameLayout({ id, emoji, title, distribution, color }) {
   });
 
   // Wire up reset button
+  const storeKey = id.replace(/^\//, ''); // '/normal' -> 'normal'
   container.querySelector('#reset-btn').addEventListener('click', () => {
-    if (confirm('すべてのデータをリセットしますか？')) {
-      clearResults(id);
-      // Reload the game
-      navigate(container.dataset.route || '/');
-      setTimeout(() => navigate(id), 10);
+    if (confirm('すべてのデータをリセットしますか?')) {
+      exportResultsAsCSV(storeKey);
+      clearResults(storeKey);
+      // Force reload current game by navigating away then back
+      const currentHash = window.location.hash;
+      window.location.hash = '';
+      requestAnimationFrame(() => {
+        window.location.hash = currentHash.slice(1) || id;
+      });
     }
   });
 

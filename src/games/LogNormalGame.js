@@ -25,17 +25,24 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">図形が一瞬だけ表示されます。面積を推定してください！</p>
-    <div class="shape-display" id="shape-display">
-      <canvas id="shape-canvas" width="300" height="300"></canvas>
+    <p class="game-area-instruction">図形が一瞬だけ表示される. 面積を推定してください</p>
+    <div style="display:flex; align-items:flex-end; gap:16px; justify-content:center;">
+      <div class="shape-display" id="shape-display">
+        <canvas id="shape-canvas" width="300" height="300"></canvas>
+      </div>
+      <div id="ref-square" style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <div style="width:50px; height:50px; border:1px solid rgba(255,255,255,0.5); background:rgba(255,255,255,0.08);"></div>
+        <span style="font-size:10px; color:var(--text-muted); font-family:var(--font-mono);">50×50</span>
+        <span style="font-size:10px; color:var(--text-muted); font-family:var(--font-mono);">= 2,500 px²</span>
+      </div>
     </div>
     <div id="guess-area" style="display:none;">
-      <p style="color:var(--text-secondary); margin-bottom:8px;">面積を推定してください（ピクセル²）</p>
-      <div class="slider-container">
-        <input type="range" class="slider-input" id="area-slider" min="100" max="50000" value="10000" step="100" />
-        <div class="slider-value" id="slider-value">10,000</div>
-      </div>
-      <button class="game-btn" id="submit-btn" style="margin-top:16px;">回答する</button>
+      <p style="color:var(--text-secondary); margin-bottom:8px;">面積を入力してください (px²)</p>
+      <input type="number" id="area-input" min="1" max="100000" value="" placeholder="例: 5000"
+        style="width:160px; padding:8px 12px; font-size:1.1rem; font-family:var(--font-mono);
+        background:var(--bg-glass-strong); border:1px solid var(--border-subtle);
+        border-radius:var(--radius-sm); color:var(--text-primary); text-align:center;" />
+      <button class="game-btn" id="submit-btn" style="margin-top:16px;">回答</button>
     </div>
     <button class="game-btn" id="start-btn">図形を表示</button>
     <div class="game-result" id="game-result" style="display:none;">
@@ -46,12 +53,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: '対数正規分布',
+      title: '対数正規分布 (Log-Normal Distribution)',
       description:
-        '変数の対数が正規分布に従う分布です。面積の推定値/真値の比をとると、人間は小さい値と大きい値を等しく間違える傾向があり、その比率の分布は対数正規分布に近くなります。',
+        '変数の対数が正規分布に従う分布である. 推定値/真値の比をとると,人間は小さい値と大きい値を等しく誤る傾向があり,その比率の分布は対数正規分布となる.',
       formula: 'f(x) = \\frac{1}{x\\sigma\\sqrt{2\\pi}} \\exp\\left(-\\frac{(\\ln x - \\mu)^2}{2\\sigma^2}\\right)',
-      tags: ['連続分布', '右に裾が長い', '掛け算的誤差', '正の値のみ'],
-      realWorld: '年収分布、株価の変動率、粒子サイズ分布',
+      tags: ['連続分布', '右に裾が長い', '乗算的誤差', '正の値のみ'],
+      realWorld: '年収分布,株価の変動率,粒子サイズ分布',
     })
   );
 
@@ -70,22 +77,20 @@ export function render(container) {
   const startBtn = layout.gameArea.querySelector('#start-btn');
   const guessArea = layout.gameArea.querySelector('#guess-area');
   const submitBtn = layout.gameArea.querySelector('#submit-btn');
-  const areaSlider = layout.gameArea.querySelector('#area-slider');
-  const sliderValue = layout.gameArea.querySelector('#slider-value');
+  const areaInput = layout.gameArea.querySelector('#area-input');
   const shapeCanvas = layout.gameArea.querySelector('#shape-canvas');
   const gameResult = layout.gameArea.querySelector('#game-result');
   const resultValue = layout.gameArea.querySelector('#result-value');
   const resultLabel = layout.gameArea.querySelector('#result-label');
 
-  areaSlider.addEventListener('input', () => {
-    sliderValue.textContent = Number(areaSlider.value).toLocaleString();
-  });
+
 
   startBtn.addEventListener('click', () => {
     gamePhase = 'showing';
     startBtn.style.display = 'none';
     gameResult.style.display = 'none';
     guessArea.style.display = 'none';
+    areaInput.value = '';
 
     // Generate a random shape
     currentTrueArea = drawRandomShape(shapeCanvas);
@@ -104,7 +109,12 @@ export function render(container) {
   });
 
   submitBtn.addEventListener('click', () => {
-    const guess = Number(areaSlider.value);
+    const guess = Number(areaInput.value);
+    if (!guess || guess <= 0) {
+      areaInput.style.borderColor = '#ef4444';
+      return;
+    }
+    areaInput.style.borderColor = '';
     const ratio = guess / currentTrueArea;
 
     const allResults = addResult(GAME_ID, ratio);
@@ -178,6 +188,8 @@ function drawRandomShape(canvas) {
     }
     area = Math.abs(area) / 2;
   }
+
+
 
   return area;
 }

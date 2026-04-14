@@ -27,7 +27,7 @@ export function render(container) {
 
   // Game area
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">目を瞑って、心の中で10秒を数えてください</p>
+    <p class="game-area-instruction">目を閉じ,心の中で10秒を計測してください</p>
     <div class="timer-display" id="timer-display">0.000</div>
     <button class="game-btn" id="start-btn">スタート</button>
     <div class="game-result" id="game-result" style="display:none;">
@@ -39,12 +39,12 @@ export function render(container) {
   // Explain card
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: '正規分布（ガウス分布）',
+      title: '正規分布 (Gaussian Distribution)',
       description:
-        '誤差は平均値の周りに対称に分布し、平均からの距離が大きくなるほど頻度が低くなります。人間の体内時計の誤差は、中心極限定理によりおおよそ正規分布に従います。',
+        '計測誤差は平均値の周りに対称に分布し,平均からの距離が大きくなるほど頻度が減少する. 体内時計の誤差は,中心極限定理によりおおよそ正規分布に従う.',
       formula: 'f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} \\exp\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right)',
-      tags: ['連続分布', '対称', '中心極限定理', '最も基本的な分布'],
-      realWorld: '身長の分布、テストの成績、製品の品質管理など',
+      tags: ['連続分布', '対称', '中心極限定理'],
+      realWorld: '身長の分布,テストの成績,製品の品質管理',
     })
   );
 

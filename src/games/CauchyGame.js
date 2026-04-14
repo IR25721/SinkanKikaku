@@ -22,11 +22,11 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">ランダムな角度でレーザーを壁に照射します。着弾点の分布を観察しよう！</p>
+    <p class="game-area-instruction">ランダムな角度でレーザーを壁に照射し,着弾点の分布を観察する</p>
     <div class="target-area" id="laser-area">
       <canvas id="laser-canvas" width="300" height="300"></canvas>
     </div>
-    <button class="game-btn" id="fire-btn">レーザー発射！</button>
+    <button class="game-btn" id="fire-btn">レーザー発射</button>
     <button class="game-btn game-btn--secondary" id="fire10-btn" style="margin-left:8px;">10連射</button>
     <div class="game-result" id="game-result" style="display:none;">
       <div class="game-result-value" id="result-value"></div>
@@ -36,12 +36,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: 'コーシー分布（ローレンツ分布）',
+      title: 'コーシー分布 (Cauchy Distribution)',
       description:
-        '正規分布に似た釣鐘型ですが、裾が非常に重いのが特徴です。平均も分散も定義できません！ランダムな角度で壁に光を当てると、着弾点がコーシー分布に従います。極端な値が頻繁に出現する「ヘビーテール」を体感してください。',
+        '正規分布に似た釣鐘型だが,裾が非常に重い. 平均も分散も定義できない. ランダムな角度で壁に光を当てると,着弾点がコーシー分布に従う.',
       formula: 'f(x) = \\frac{1}{\\pi\\gamma\\left[1 + \\left(\\frac{x - x_0}{\\gamma}\\right)^2\\right]}',
-      tags: ['連続分布', 'ヘビーテール', '平均が存在しない', '物理学由来'],
-      realWorld: 'ブラウン運動の比率、共鳴曲線の形、ランダムウォークの角度',
+      tags: ['連続分布', 'ヘビーテール', '平均が存在しない'],
+      realWorld: 'Breit-Wigner 共鳴曲線,ランダムウォークの角度',
     })
   );
 
@@ -179,7 +179,7 @@ function updateStats(results, statsRows) {
 
   updateStatsRows(statsRows, [
     { label: '発射回数', value: `${results.length}` },
-    { label: '中央値', value: `${median.toFixed(2)} (平均は定義不能！)` },
+    { label: '中央値', value: `${median.toFixed(2)} (平均は定義不能)` },
     { label: '|x|>5 の割合', value: `${((extremes / results.length) * 100).toFixed(1)}%` },
     { label: '最大値', value: `${Math.max(...results).toFixed(1)}` },
     { label: '最小値', value: `${Math.min(...results).toFixed(1)}` },

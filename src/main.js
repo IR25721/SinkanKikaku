@@ -54,16 +54,16 @@ function renderLanding(container) {
   hero.className = 'landing-hero animate-fade-in-up';
   hero.innerHTML = `
     <h1>分布体験会</h1>
-    <p>確率分布をゲームで体感しよう！<br/>
-    10種類のインタラクティブな体験で、統計学を楽しく学べます。</p>
+    <p>確率分布の性質を,インタラクティブな実験を通じて体験的に学ぶ.<br/>
+    以下の10種類の分布について,データ生成・ヒストグラム・ベイズ更新を実際に操作できる.</p>
   `;
   landing.appendChild(hero);
 
   // Phase groups
   const phases = [
-    { label: 'Phase 1 — 基本分布', phase: 1 },
-    { label: 'Phase 2 — 応用分布', phase: 2 },
-    { label: 'Phase 3 — マイナー分布', phase: 3 },
+    { label: '基本的な分布', phase: 1 },
+    { label: '応用的な分布', phase: 2 },
+    { label: '発展的な分布', phase: 3 },
   ];
 
   phases.forEach(({ label, phase }) => {

@@ -27,7 +27,7 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">動くリングに向かってクリック！成功率をベイズ推定します</p>
+    <p class="game-area-instruction">動くリングをクリックし,成功確率の事後分布をベイズ推定する</p>
     <div style="display:flex; gap:24px; margin-bottom:12px; font-family:var(--font-mono);">
       <span>成功: <span id="hit-count" style="color:var(--color-beta)">0</span></span>
       <span>失敗: <span id="miss-count" style="color:var(--text-muted)">0</span></span>
@@ -44,12 +44,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: 'ベータ分布',
+      title: 'ベータ分布 (Beta Distribution)',
       description:
-        '0〜1の範囲の確率や割合をモデリングする分布です。ベルヌーイ試行の成功確率の事後分布として自然に現れ、データが増えるほど「あなたの本当の実力」が見えてきます。',
+        '[0, 1] 上の確率や割合をモデリングする分布である. Bernoulli 試行の成功確率の共役事前分布として,データが増えるほど事後分布が鋭くなる.',
       formula: 'f(p;\\,\\alpha,\\beta) = \\frac{p^{\\alpha-1}(1-p)^{\\beta-1}}{B(\\alpha,\\beta)}',
-      tags: ['連続分布', '0〜1の範囲', 'ベイズ推定の定番', '共役事前分布'],
-      realWorld: '打率の推定、A/Bテストの成功率、薬の効果の確率',
+      tags: ['連続分布', '[0,1] 上', '共役事前分布', 'ベイズ推定'],
+      realWorld: '打率の推定,A/Bテストの成功率,薬の効果の確率',
     })
   );
 

@@ -27,7 +27,7 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">光ったらすぐにボタンを押してください（反応時間は含みません）</p>
+    <p class="game-area-instruction">シグナルが点灯したらボタンを押してください (反応時間は除外されない)</p></p>
     <div class="flash-area" id="flash-area">
       <span style="font-size: 3rem;">💡</span>
     </div>
@@ -41,12 +41,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: '指数分布',
+      title: '指数分布 (Exponential Distribution)',
       description:
-        '次の事象が起こるまでの待ち時間の分布です。「メモリレス性」という特徴があり、どれだけ待ってもこの先の待ち時間の期待値は変わりません。',
+        '次の事象が起こるまでの待ち時間の分布である. メモリレス性を持ち,どれだけ待っても残りの待ち時間の期待値は変わらない.',
       formula: 'f(x) = \\lambda e^{-\\lambda x} \\quad (x \\geq 0)',
       tags: ['連続分布', 'メモリレス性', '待ち時間', 'ポアソン過程と対'],
-      realWorld: 'コンビニのレジに次の客が来るまでの時間、放射性崩壊の間隔',
+      realWorld: 'レジに次の客が来るまでの時間,放射性崩壊の間隔',
     })
   );
 

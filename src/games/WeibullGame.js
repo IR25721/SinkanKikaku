@@ -30,13 +30,13 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">10個の電球を観察しましょう。いつ切れるか予測できますか？</p>
+    <p class="game-area-instruction">10個の電球を観察する. 故障時刻の分布を記録する.</p>
     <div style="font-family:var(--font-mono); margin-bottom:16px;">
       経過時間: <span id="sim-time" style="color:var(--color-weibull);">0.0</span> 秒
       ｜ 残り: <span id="alive-count" style="color:var(--color-weibull);">${NUM_BULBS}</span> 個
     </div>
     <div class="bulb-grid" id="bulb-grid"></div>
-    <button class="game-btn" id="start-btn">シミュレーション開始</button>
+    <button class="game-btn" id="start-btn">開始</button>
     <div class="game-result" id="game-result" style="display:none;">
       <div class="game-result-value" id="result-value"></div>
       <div class="game-result-label" id="result-label"></div>
@@ -45,12 +45,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: 'ワイブル分布',
+      title: 'ワイブル分布 (Weibull Distribution)',
       description:
-        '信頼性工学で最もよく使われる分布です。形状パラメータ k によって故障率が時間とともに増加(k>1)、一定(k=1:指数分布)、減少(k<1)するパターンを表現できます。今回は k=2 なので、時間が経つほど壊れやすくなります。',
+        '信頼性工学で広く用いられる分布. 形状パラメータ k により故障率が時間とともに増加 (k>1),一定 (k=1: 指数分布),減少 (k<1) するパターンを表現できる. 本実験では k=2 とし,経年劣化型の故障を観察する.',
       formula: 'f(x) = \\frac{k}{\\lambda}\\left(\\frac{x}{\\lambda}\\right)^{k-1} \\exp\\left[-\\left(\\frac{x}{\\lambda}\\right)^k\\right]',
-      tags: ['連続分布', '信頼性工学', '故障率変動', '指数分布の一般化'],
-      realWorld: '機械部品の寿命、風速の分布、材料強度のばらつき',
+      tags: ['連続分布', '信頼性工学', '故障率変動'],
+      realWorld: '機械部品の寿命,風速の分布,材料強度のばらつき',
     })
   );
 
@@ -134,11 +134,11 @@ export function render(container) {
         clearInterval(simInterval);
         gameActive = false;
 
-        resultValue.textContent = '全滅！';
+        resultValue.textContent = '全滅';
         resultLabel.textContent = `全電球が ${simTime.toFixed(1)} 秒で故障`;
         gameResult.style.display = 'block';
         startBtn.style.display = 'inline-block';
-        startBtn.textContent = 'もう一度';
+        startBtn.textContent = '再実行';
       }
     }, 100);
   });

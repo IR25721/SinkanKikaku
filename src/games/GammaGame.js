@@ -27,7 +27,7 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">カフェで${N_CUSTOMERS}人目のお客さんが来るまでの時間をシミュレーション！</p>
+    <p class="game-area-instruction">カフェで${N_CUSTOMERS}人目の客が到着するまでの合計待ち時間をシミュレーションする.</p>
     <div class="cafe-area" id="cafe-area">
       <canvas id="cafe-canvas" width="400" height="200"></canvas>
     </div>
@@ -35,8 +35,8 @@ export function render(container) {
       到着: <span id="arrival-count" style="color:var(--color-gamma);">0</span> / ${N_CUSTOMERS} 人
       ｜ 経過: <span id="elapsed-time" style="color:var(--color-gamma);">0.0</span> 秒
     </div>
-    <button class="game-btn" id="start-btn">シミュレーション開始</button>
-    <button class="game-btn game-btn--secondary" id="auto-btn" style="margin-left:8px;">10回自動実行</button>
+    <button class="game-btn" id="start-btn">開始</button>
+    <button class="game-btn game-btn--secondary" id="auto-btn" style="margin-left:8px;">10回連続実行</button>
     <div class="game-result" id="game-result" style="display:none;">
       <div class="game-result-value" id="result-value"></div>
       <div class="game-result-label" id="result-label"></div>
@@ -45,12 +45,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: 'ガンマ分布',
+      title: 'ガンマ分布 (Gamma Distribution)',
       description:
-        'ガンマ分布は指数分布の一般化で、n個の独立な指数分布に従う待ち時間の合計の分布です。形状パラメータ α が整数のとき、これは特にアーラン分布と呼ばれます。',
+        'ガンマ分布は指数分布の一般化であり,n 個の独立な指数分布に従う待ち時間の和の分布である. 形状パラメータ α が整数のとき,特にアーラン分布と呼ばれる.',
       formula: 'f(x) = \\frac{\\beta^\\alpha}{\\Gamma(\\alpha)} x^{\\alpha-1} e^{-\\beta x}',
-      tags: ['連続分布', '指数分布の和', 'アーラン分布', '待ち行列理論'],
-      realWorld: '保険の累積請求額、降雨量の分布、電話交換局の待ち時間',
+      tags: ['連続分布', '指数分布の和', 'アーラン分布'],
+      realWorld: '保険の累積請求額,降雨量の分布,電話交換局の待ち時間',
     })
   );
 

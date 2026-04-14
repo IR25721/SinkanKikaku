@@ -42,8 +42,5 @@ export function renderGameCard({
 
   card.addEventListener('click', () => navigate(id));
 
-  // Staggered animation
-  card.style.animationDelay = `${Math.random() * 0.2}s`;
-
   return card;
 }

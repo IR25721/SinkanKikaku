@@ -25,7 +25,7 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">ルーレットを回して、好きなところで止めてください</p>
+    <p class="game-area-instruction">ルーレットを回し,任意の位置で停止してください</p>
     <div class="roulette-container" id="roulette-container">
       <div class="roulette-wheel" id="roulette-wheel">
         <canvas id="roulette-canvas" width="280" height="280"></canvas>
@@ -44,12 +44,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: '一様分布',
+      title: '一様分布 (Uniform Distribution)',
       description:
-        'すべての値が同じ確率で出現する分布です。理想的にはルーレットの停止位置は0°〜360°に均等に分布するはずですが、人間にはどうしてもバイアスがあります。',
+        'すべての値が同じ確率で出現する分布である. ルーレットの停止位置が 0°〜360° に均等に分布するか,人間のバイアスを検証する.',
       formula: 'f(x) = \\frac{1}{b - a} \\quad (a \\leq x \\leq b)',
-      tags: ['連続分布', '最もシンプル', 'バイアスの可視化'],
-      realWorld: 'サイコロの出目、抽選番号、乱数生成の基礎',
+      tags: ['連続分布', 'バイアスの可視化'],
+      realWorld: 'サイコロの出目,抽選番号,乱数生成の基礎',
     })
   );
 

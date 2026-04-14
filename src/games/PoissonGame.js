@@ -30,7 +30,7 @@ export function render(container) {
   });
 
   layout.gameArea.innerHTML = `
-    <p class="game-area-instruction">10秒間に現れる ⭐ をタップして捕まえよう！</p>
+    <p class="game-area-instruction">10秒間に出現する ⭐ をタップして捕獲してください</p>
     <div style="display:flex; justify-content:space-between; width:100%; max-width:400px; margin-bottom:12px;">
       <span id="timer-label" style="font-family:var(--font-mono);">残り ${DURATION} 秒</span>
       <span id="count-label" style="font-family:var(--font-mono); color:var(--color-poisson);">捕獲: 0</span>
@@ -48,12 +48,12 @@ export function render(container) {
 
   layout.explainArea.appendChild(
     renderExplainCard({
-      title: 'ポアソン分布',
+      title: 'ポアソン分布 (Poisson Distribution)',
       description:
-        '一定時間内にランダムに起こるイベントの回数を表す分布です。平均発生率 λ だけで形が決まります。分散も λ に等しいという特徴があります。',
+        '一定時間内にランダムに発生するイベントの回数を表す分布である. 平均発生率 λ のみで形が決まり,分散も λ に等しい.',
       formula: 'P(X=k) = \\frac{\\lambda^k \\, e^{-\\lambda}}{k!}',
       tags: ['離散分布', 'カウントデータ', '指数分布と対', '分散=平均'],
-      realWorld: '1時間に来る電話の回数、1ページの誤植の数、交差点での事故件数',
+      realWorld: '1時間に来る電話の回数,1ページの誤植の数,交差点での事故件数',
     })
   );
 
