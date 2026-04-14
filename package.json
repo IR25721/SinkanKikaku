@@ -1,0 +1,21 @@
+{
+  "name": "sinkan-kikaku",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vite": "^8.0.4",
+    "vitest": "^3.1.1"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.8",
+    "jstat": "^1.9.6"
+  }
+}
