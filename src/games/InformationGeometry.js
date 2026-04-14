@@ -4,6 +4,7 @@
  */
 import { createGameLayout } from './GameLayout.js';
 import { linspace, jStat } from '../stats/distributions.js';
+import { renderExplainCard } from '../components/ExplainCard.js';
 import {
   Chart,
   ScatterController,
@@ -397,29 +398,3 @@ export function cleanup() {
   if (animationId) cancelAnimationFrame(animationId);
 }
 
-function renderExplainCard({ title, description, formula, tags, realWorld }) {
-  const card = document.createElement('div');
-  card.className = 'explain-card';
-  card.innerHTML = `
-    <h2 class="explain-card-title">${title}</h2>
-    <div class="explain-card-description">${description}</div>
-    <div class="explain-card-formula" id="formula-container"></div>
-    <div class="explain-card-section-title">応用例</div>
-    <div class="explain-card-description">${realWorld}</div>
-    <div class="explain-card-tags">
-      ${tags.map(t => `<span class="explain-card-tag">${t}</span>`).join('')}
-    </div>
-  `;
-
-  if (window.katex) {
-    try {
-      window.katex.render(formula, card.querySelector('#formula-container'), { displayMode: true });
-    } catch (e) {
-      card.querySelector('#formula-container').innerHTML = `<code>${formula}</code>`;
-    }
-  } else {
-    card.querySelector('#formula-container').innerHTML = `<code>${formula}</code>`;
-  }
-
-  return card;
-}

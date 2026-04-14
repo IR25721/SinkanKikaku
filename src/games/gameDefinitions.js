@@ -99,7 +99,7 @@ export const GAMES = [
     emoji: '💡',
     title: '電球寿命',
     distribution: 'ワイブル分布',
-    description: '形状パラメータ k > 1 の場合の故障率増加を,電球の寿命シミュレーションで観察する.',
+    description: '形状パラメータ $k > 1$ の場合の故障率増加を,電球の寿命シミュレーションで観察する.',
     color: 'weibull',
     glow: 'weibull',
     badge: 'Phase 3',

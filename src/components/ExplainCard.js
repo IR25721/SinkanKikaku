@@ -26,6 +26,16 @@ function renderLatex(latex, displayMode = true) {
 }
 
 /**
+ * Parses a string for $math$ inline LaTeX and replaces it with KaTeX HTML.
+ * @param {string} text
+ * @returns {string}
+ */
+function replaceInlineLatex(text) {
+  if (!text) return '';
+  return text.replace(/\$([^\$]+)\$/g, (match, mathContent) => renderLatex(mathContent.trim(), false));
+}
+
+/**
  * Render an explanation card.
  * @param {Object} config
  * @param {string} config.title - Card title
@@ -41,12 +51,15 @@ export function renderExplainCard({ title, description, formula, tags = [], real
 
   const formulaHtml = formula ? renderLatex(formula) : '';
 
+  const descHtml = replaceInlineLatex(description);
+  const rwHtml = replaceInlineLatex(realWorld);
+
   card.innerHTML = `
     <div class="explain-card-title">📖 ${title}</div>
     <div class="explain-card-body">
-      <p>${description}</p>
+      <p>${descHtml}</p>
       ${formulaHtml ? `<div class="explain-card-formula">${formulaHtml}</div>` : ''}
-      ${realWorld ? `<p style="margin-top: 12px;">💡 <strong>日常の例:</strong> ${realWorld}</p>` : ''}
+      ${rwHtml ? `<p style="margin-top: 12px;">💡 <strong>日常の例:</strong> ${rwHtml}</p>` : ''}
     </div>
     ${
       tags.length > 0
