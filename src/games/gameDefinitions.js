@@ -116,4 +116,16 @@ export const GAMES = [
     badge: 'Phase 3',
     phase: 3,
   },
+  // Phase 4
+  {
+    id: '/infogeo',
+    emoji: '📐',
+    title: '統計多様体と測地線',
+    distribution: '情報幾何学',
+    description: 'Fisher情報計量による分布空間の歪みを可視化する. パラメータ空間上の測地線が分布をどう変えるか観察する.',
+    color: 'normal',
+    glow: 'normal',
+    badge: 'Phase 4',
+    phase: 4,
+  },
 ];

@@ -19,6 +19,7 @@ import * as BetaGame from './games/BetaGame.js';
 import * as CauchyGame from './games/CauchyGame.js';
 import * as WeibullGame from './games/WeibullGame.js';
 import * as GammaGame from './games/GammaGame.js';
+import * as InformationGeometry from './games/InformationGeometry.js';
 
 const gameModules = {
   '/normal': NormalGame,
@@ -31,6 +32,7 @@ const gameModules = {
   '/cauchy': CauchyGame,
   '/weibull': WeibullGame,
   '/gamma': GammaGame,
+  '/infogeo': InformationGeometry,
 };
 
 // Setup app
@@ -55,7 +57,7 @@ function renderLanding(container) {
   hero.innerHTML = `
     <h1>分布体験会</h1>
     <p>確率分布の性質を,インタラクティブな実験を通じて体験的に学ぶ.<br/>
-    以下の10種類の分布について,データ生成・ヒストグラム・ベイズ更新を実際に操作できる.</p>
+    以下の11種類の分布と理論について,データ生成・ヒストグラム・ベイズ更新・統計多様体を実際に操作できる.</p>
   `;
   landing.appendChild(hero);
 
@@ -64,6 +66,7 @@ function renderLanding(container) {
     { label: '基本的な分布', phase: 1 },
     { label: '応用的な分布', phase: 2 },
     { label: '発展的な分布', phase: 3 },
+    { label: '発展理論 (Information Geometry)', phase: 4 },
   ];
 
   phases.forEach(({ label, phase }) => {
